@@ -1,1 +1,2 @@
 CREATE DATABASE db2;
+CREATE DATABASE john_testdb1;
