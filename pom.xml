@@ -11,6 +11,7 @@
     <modules>
         <module>mybatisxml</module>
         <module>demo1</module>
+        <module>EurekServer1</module>
     </modules>
 
 
