@@ -12,6 +12,10 @@
         <module>mybatisxml</module>
         <module>demo1</module>
         <module>EurekServer1</module>
+        <module>consumer1</module>
+        <module>EurekaServer2</module>
+        <module>computeservice1</module>
+
     </modules>
 
 

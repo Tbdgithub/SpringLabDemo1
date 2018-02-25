@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -14,12 +16,14 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
+@EnableDiscoveryClient
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = MockServletContext.class)
+//@SpringApplicationConfiguration(classes = MockServletContext.class)
+@SpringBootTest
 @WebAppConfiguration
 public class ApplicationTests {
 
@@ -27,6 +31,8 @@ public class ApplicationTests {
 
 	@Before
 	public void setUp() throws Exception {
+
+
 		mvc = MockMvcBuilders.standaloneSetup(new ComputeController()).build();
 	}
 
@@ -34,7 +40,16 @@ public class ApplicationTests {
 	public void getHello() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/hello").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
-				.andExpect(content().string(equalTo("Hello World")));
+				.andExpect(content().string(equalTo("hello computerservice1")));
+	}
+
+
+
+
+	@Test
+	public void getHello1() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/hello")
+				.accept(MediaType.APPLICATION_JSON_UTF8)).andDo(print());
 	}
 
 }
